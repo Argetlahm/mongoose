@@ -12,9 +12,19 @@ db.once('open', function() {
 });
 
 const fruitSchema = new mongoose.Schema({
-  name: String,
+  name: {
+    type: String,
+    required:true
+  },
   rating: Number,
   review: String
 });
 
 const Fruit = mongoose.model("Fruit", fruitSchema);
+
+const durian = new Fruit({
+  name:"Durian",
+  rating:10,
+  review:"gak enak"
+})
+durian.save()

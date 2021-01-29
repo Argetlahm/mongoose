@@ -29,11 +29,20 @@ const durian = new Fruit({
 })
 // durian.save()
 
-Fruit.updateOne({name:"Durian"},{rating:-1},function(err){
+// Fruit.updateOne({name:"Durian"},{rating:-1},function(err){
+//   if (err) {
+//     console.log(err);
+//   } else {
+//     console.log("Success!");
+//     mongoose.connection.close()
+//   }
+// })
+
+Fruit.deleteOne({name:"Durian"},function(err){
   if (err) {
     console.log(err);
   } else {
-    console.log("Success!");
-    mongoose.connection.close()
+    console.log("Delete Success!");
+    mongoose.connection.close();
   }
-})
+});

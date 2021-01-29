@@ -27,4 +27,13 @@ const durian = new Fruit({
   rating:10,
   review:"gak enak"
 })
-durian.save()
+// durian.save()
+
+Fruit.updateOne({name:"Durian"},{rating:-1},function(err){
+  if (err) {
+    console.log(err);
+  } else {
+    console.log("Success!");
+    mongoose.connection.close()
+  }
+})

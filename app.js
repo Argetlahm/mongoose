@@ -9,6 +9,7 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
   // we're connected!
   console.log("we're connected")
+  // console.log(db.collections)
 });
 
 const fruitSchema = new mongoose.Schema({
@@ -22,17 +23,33 @@ const fruitSchema = new mongoose.Schema({
 
 const Fruit = mongoose.model("Fruit", fruitSchema);
 
+// const pineapple = new Fruit({
+//   name:"Pineapple",
+//   rating:8,
+//   review:"Hohohho"
+// });
+// pineapple.save();
+
+const dragonFruit = new Fruit({
+  name:"Buah Naga",
+  rating: 10,
+  review:"Legendary fruit"
+});
+dragonFruit.save();
+
 const peopleSchema = new mongoose.Schema({
   name: String,
-  age: Number
+  age: Number,
+  favouriteFruit: fruitSchema
 });
 
 const person = new mongoose.model("person", peopleSchema);
 
-const someone = new person({
-  name:"John",
-  age:90
-});
+// const someone = new person({
+//   name:"Amy",
+//   age:12,
+//   favouriteFruit:pineapple
+// });
 // someone.save();
 
 const durian = new Fruit({
@@ -59,11 +76,19 @@ const durian = new Fruit({
 //     mongoose.connection.close();
 //   }
 // });
-person.deleteMany({name:"John"},function(err){
+// person.deleteMany({name:"John"},function(err){
+//   if (err) {
+//     console.log(err);
+//   } else {
+//     console.log("Deleted");
+//     mongoose.connection.close();
+//   }
+// })
+
+person.updateOne({name:"John"},{favouriteFruit:dragonFruit},function(err){
   if (err) {
     console.log(err);
   } else {
-    console.log("Deleted");
-    mongoose.connection.close();
+    console.log("Berhasil update");
   }
 })
